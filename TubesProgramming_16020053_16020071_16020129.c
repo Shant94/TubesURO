@@ -35,46 +35,49 @@ int Abs(int m){
 int vektor(int p, int q){
     return (pangkat(p,2) + pangkat(q,2));
 }
-void findPos(int *dir)
+void findPos(int dir)
 {
-    int i;
-    int n=5;
-    for (i = 0; dir[i] != '\0' ; i++) {
-
-        //Counts each direction1
-        if (dir[i] == 7)
-            q++;
-        else if (dir[i] == 8)
-            q--;
-        else if (dir[i] == 6)
-            w--;
-        else if (dir[i] == 9)
-            w++;
-
-          //In case of illegal character in the string
-        if (q<0 || w<0)
-        {
-            printf("Robot diluar jangkauan, silahkan ulangi kembali.\n");
-            break;
-        }
-        if (w == a && q == b)
-        {
-            printf("Robot menabrak kecoak, silahkan ulangi kembali.\n");
-            break;
-        }
-
-        if (dir[i] == 7)
+    //Counts each direction
+    if (dir == 7){
+        q++;
+    }
+    else if (dir == 8){
+        q--;
+    }
+    else if (dir == 6){
+        w--;
+    }
+    else if (dir == 9){
+        w++;
+    }
+    //In case of illegal character in the string
+    if (q<0 || w<0)
+    {
+        printf("Robot diluar jangkauan, silahkan ulangi kembali.\n");
+    }
+    else if (w == a && q == b)
+    {
+        printf("Robot menabrak kecoak, silahkan ulangi kembali.\n");
+    }
+    else{
+        if (dir == 7){
             up++;
-        else if (dir[i] == 8)
+        }
+        else if (dir == 8){
             down++;
-        else if (dir[i] == 6)
+        }
+        else if (dir == 6){
             left++;
-        else if (dir[i] == 9)
+        }
+        else if (dir == 9){
             right++;
+        }
     }
      //Final position of robot
     x = right - left;
     y = up - down;
+    q = y;
+    w = x;
     ;
 }
    /* Intializes random number generator */
@@ -113,7 +116,7 @@ void Fire(int h, int v){
 }
 void InactivateRobot(){
     printf("\nGame Over\n");
-    printf("Kamu berhasil membasmi %d kecoak", count);
+    printf("Kamu berhasil membasmi %d kecoak\n", count);
 }
 void KecoakMoveset(){
     //Cek jarak
@@ -171,7 +174,7 @@ void Menu(){
 }
 
 int main(){
-    int *dir;
+    int dir;
     int choice;
     spawn();
     while (robothealth > 0){
@@ -193,7 +196,7 @@ int main(){
             scanf("%d", &dir);
 
             //Function call to calculate position
-            findPos(&dir);
+            findPos(dir);
             break;
         case 2:
             //Function call to take hit and miss of shooting programm
